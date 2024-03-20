@@ -36,7 +36,7 @@ def fillRC():
     for i in range(9):
         for j in range(9):
             rows[i][int(board[i][j])] = True
-            columns[j][int(board[i][j])] = True
+            columns[i][int(board[j][i])] = True
             squares[((i%3) * 3) + (j % 3)][int(board[i][j])] = True
 
 
@@ -46,6 +46,8 @@ def run():
     rows = [[False] * size] * size  # ---
     columns = [[False] * size] * size  # |||
     squares = [[False] * size] * size
+    for i in range(9):
+        print(rows[i], columns[i], squares[i])
     fillRC()
     for i in range(9):
         print(rows[i], columns[i], squares[i])
