@@ -1,3 +1,4 @@
+#TODO wczytac boarda za pomoca io.py
 rows = [[False] * 9] * 9
 columns = [[False] * 9] * 9
 squares = [[False] * 9] * 9
