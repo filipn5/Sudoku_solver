@@ -1,12 +1,10 @@
 import communication
+
 size = 10
-rows = [[False] * size] * size #---
-columns = [[False] * size] * size #|||
-squares = [[False] * size] * size
-board = [[]]
+
 
 def check(col, row, candidat):
-    sqId = (row - 1)*3 + col
+    sqId = ((row%3) * 3) + (col % 3)
     if rows[row][candidat] == False and columns[col][candidat] == False and squares[sqId][candidat] == False:
         rows[row][candidat] = True
         columns[col][candidat] = True
@@ -19,7 +17,7 @@ def solve():
     czy = False
     for i in range(9):
         for j in range(9):
-            if board[i][j] == '0':
+            if board[i][j] == "0":
                 czy = True
                 for c in range(1, 9):
                     if check(i, j, c):
@@ -33,18 +31,24 @@ def solve():
 
 
 def fillRC():
-    #rows
     for i in range(9):
         for j in range(9):
+           # print(i, j, ((i%3) * 3) + (j % 3))
             rows[i][int(board[i][j])] = True
             columns[j][int(board[i][j])] = True
-            squares[(j - 1)*3 + i][int(board[i][j])] = True
+            squares[((i%3) * 3) + (j % 3)][int(board[i][j])] = True
+
 
 def run():
+    global board, rows, columns, squares
     board = communication.get_board()
-    print(int(board[0][6]))
+    rows = [[False] * size] * size  # ---
+    columns = [[False] * size] * size  # |||
+    squares = [[False] * size] * size
     fillRC()
-    solve()
-    communication.display_board(board)
+    if solve():
+        communication.display_board(board)
+    else:
+        print("Wrong board")
 if __name__ == '__main__':
     run()
