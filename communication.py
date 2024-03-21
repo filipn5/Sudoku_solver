@@ -1,9 +1,12 @@
 def get_board():
-    print("podaj plansze: ");
+    print("enter the board: ");
     board = []
     for i in range(9):
         row = input()
-        board.append(row)
+        lista = []
+        for j in range(9):
+            lista.append(int(row[j]))
+        board.append(lista)
     return board
 
 
@@ -11,5 +14,3 @@ def display_board(board):
     for i in range(9):
         print(board[i])
 
-board = get_board();
-display_board(board)
